@@ -1,0 +1,1 @@
+INSERT INTO customer (id,name) VALUES (1L, '澁谷晶久');
