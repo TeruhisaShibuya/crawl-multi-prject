@@ -1,6 +1,7 @@
 package com.example.app.controller;
 
 import com.example.core.domain.Customer;
+import com.example.core.repository.CustomerRepository;
 import com.example.core.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,7 +19,6 @@ import java.util.List;
 public class BatchController {
 
     private final CustomerService customerService;
-
 
     /**
      * バッチで会員情報を全て取得する

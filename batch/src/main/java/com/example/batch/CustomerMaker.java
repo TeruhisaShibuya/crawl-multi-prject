@@ -1,6 +1,8 @@
 package com.example.batch;
 
 import com.example.core.domain.Customer;
+import com.example.core.repository.CustomerRepository;
+import com.example.core.service.CustomerService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +20,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 public class CustomerMaker implements Runnable {
+
+    private final CustomerService customerService;
 
     private final RestTemplate restTemplate;
     private final HttpServletRequest request;
@@ -38,24 +42,22 @@ public class CustomerMaker implements Runnable {
 //            String appDomainUrl = getBaseUrl(request);
 //            String targetUrl = appDomainUrl + targetPath;
 
-            String targetUrl = "http://localhost:8080/batch/customer/list";
-
+            //String targetUrl = "http://localhost:8080/batch/customer/list";
             // 指定のURLにアクセスしてデータを取得 okHttp3みたいな形式で指定のURLにアクセスする
-            ResponseEntity<List<Customer>> response = restTemplate.exchange(
-                    targetUrl,
-                    HttpMethod.GET,
-                    null,
-                    new ParameterizedTypeReference<List<Customer>>() {}
-            );
+//            ResponseEntity<List<Customer>> response = restTemplate.exchange(
+//                    targetUrl,
+//                    HttpMethod.GET,
+//                    null,
+//                    new ParameterizedTypeReference<List<Customer>>() {}
+//            );
+//            System.out.println("コントローラへのアクセス処理終了");
+//            List<Customer> customers = response.getBody();
 
-
-            System.out.println("コントローラへのアクセス処理終了");
-
+            // CustomerRepositoryでテーブルからデータを取得する
+            List<Customer> customers = customerService.findAll();
 
             // getBodyメソッドで指定の型のデータが取得できる
-            List<Customer> customers = response.getBody();
-
-            if (customers != null ) {
+            if (!customers.isEmpty()) {
                 for (Customer c: customers) {
                     System.out.println("レコードID: " + c.getId());
                     System.out.println("名前: " + c.getName());
