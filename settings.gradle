@@ -1,0 +1,4 @@
+rootProject.name = 'crawler'
+
+// 以下の記述でディレクトリがプロジェクトとして認識される
+include('app','core')

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>会員一覧画面</title>
+</head>
+<body>
+<div th:each="customer : ${customers}" th:object="${customer}">
+  <p th:text0="*{name}"></p>
+</div>
+</body>
+</html>
